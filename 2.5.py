@@ -3,6 +3,7 @@ from all_colors import *
 import pygame
 
 pygame.init()
+WIDTH, HEIGHT = 1280, 720
 size = (1280, 720)
 screen = pygame.display.set_mode(size)
 pygame.display.set_caption("Моя игра")
@@ -11,15 +12,12 @@ screen.fill(BACKGROUND)
 x = 0
 y = 0
 rect_size = 200
+center_x = WIDTH // 2
+center_y = HEIGHT // 2
+initial_size = 400
 colors = [RED, GREEN, BLUE, YELLOW, CYAN, MAGENTA, GRAY, ORANGE, PINK, BROWN, PURPLE, LIME, NAVY, OLIVE, MAROON, TEAL,
           SILVER, GOLD]
 
-for i in range(1, 18):
-    rect = pygame.Rect(x, y, rect_size / i, rect_size / i)
-    rect.center = (screen.get_width() // 2, screen.get_height() // 2)
-    color = random.choice(colors)
-
-    pygame.draw.rect(screen, color, rect)
 
 FPS = 60
 clock = pygame.time.Clock()
@@ -30,6 +28,14 @@ while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
+
+
+    size = 400
+    for _ in range(19):
+        pygame.draw.rect(screen, random.choice(COLORS), (WIDTH // 2 - size // 2, HEIGHT // 2 - size // 2, size, size),
+                         2)
+        size -= 10
+
     #
     #
     pygame.display.flip()
